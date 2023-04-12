@@ -1,0 +1,48 @@
+.filter {
+    max-width: 500px;
+    border-radius: 0.5rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    padding: 1rem 0;
+}
+
+.container {
+    padding: 0 1.5rem;
+}
+
+.title {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--slate-600);
+}
+
+.subtitle {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+    color: var(--slate-600);
+    margin-top: 1rem;
+}
+
+.betweenLine {
+    display: block;
+    min-width: 20px;
+    height: 2px;
+    background-color: var(--stroke);
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    gap: 1rem;
+}
+
+.line {
+    display: block;
+    height: 1px;
+    width: 100%;
+    background-color: var(--stroke);
+    margin-top: 1rem;
+}

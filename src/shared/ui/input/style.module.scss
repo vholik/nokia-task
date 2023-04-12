@@ -1,0 +1,16 @@
+.input {
+    font-size: 1rem;
+    color: var(--black);
+    font-family: var(--font);
+    line-height: 1.5rem;
+    padding: 0.6rem 1rem;
+    border-radius: 2rem;
+    outline: none;
+    border: none;
+    width: 100%;
+    background-color: var(--slate-100);
+
+    &::placeholder {
+        color: var(--slate-500);
+    }
+}

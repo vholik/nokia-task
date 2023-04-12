@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    letter-spacing: -0.02em;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Inter', 'sans-serif';
+    margin: 2rem 200px;
+    color: var(--black);
+}
+
+:root {
+    --font: 'Inter', 'sans-serif';
+    --slate-500: #a8b0bf;
+    --black: #0e1014;
+    --black-onhover: #20242b;
+    --primary: #1f92cc;
+    --slate-600: #717885;
+    --slate-100: #f5f7fa;
+    --stroke: #ececed;
+    --white: #ffffff;
+    --white-onhover: #f3f3f3;
+    --primary-100: #f1ebff;
+    --violet: #8e6fe9;
+    --red: #ed5d5e;
+    --blue: #60bebe;
+    --green: #70cb86;
+    --yellow: #eac44a;
+    --purple: #d16cd5;
+}

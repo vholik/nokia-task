@@ -1,0 +1,27 @@
+.button {
+    font-size: 1rem;
+    color: var(--white);
+    line-height: 1.5rem;
+    padding: 0.8rem 2rem;
+    border-radius: 2rem;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--slate-600);
+    border: 1px solid var(--stroke);
+    background-color: transparent;
+    transition: background 0.2s linear;
+
+    &:hover {
+        background-color: var(--white-onhover);
+    }
+}
+
+.primary {
+    background-color: var(--black);
+    color: var(--white);
+
+    &:hover {
+        background-color: var(--black-onhover);
+    }
+}
