@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 export interface SummaryRes {
     Global: {
         NewConfirmed: 100282;
@@ -23,3 +25,12 @@ export interface Country {
     TotalRecovered: number;
     Date: string;
 }
+
+export interface Filter {
+    totalDeaths: [number, number];
+    totalConfirmed: [number, number];
+    totalRecovered: [number, number];
+    sortBy: null | 'totalDeaths' | 'totalConfirmed' | 'totalRecovered';
+}
+
+export type SetFilter = Dispatch<SetStateAction<Filter>>;

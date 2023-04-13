@@ -24,6 +24,11 @@
     margin-top: 1rem;
 }
 
+.error {
+    color: var(--red);
+    margin-top: 1rem;
+}
+
 .betweenLine {
     display: block;
     min-width: 20px;
@@ -37,6 +42,14 @@
     justify-content: space-between;
     margin-top: 1.5rem;
     gap: 1rem;
+}
+
+.buttonWrapper {
+    margin-top: 1.5rem;
+    display: flex;
+    align-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .line {

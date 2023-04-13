@@ -2,21 +2,22 @@ import { ButtonHTMLAttributes, Ref, forwardRef } from 'react';
 import cn from 'classnames';
 import style from './style.module.scss';
 
-type InputProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-    isPrimary?: boolean;
-    placeholder?: string;
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+    value: string;
+    property?: 'focused' | 'primary' | null;
 };
 
-export const ButtonComponent = forwardRef((props: InputProps, ref: Ref<HTMLButtonElement>) => {
+export const ButtonComponent = forwardRef((props: ButtonProps, ref: Ref<HTMLButtonElement>) => {
     return (
         <button
             ref={ref}
             {...props}
             className={cn(style.button, {
-                [style.primary]: props.isPrimary,
+                [style.primary]: props.property === 'primary',
+                [style.focused]: props.property === 'focused',
             })}
         >
-            {props.placeholder}
+            {props.value}
         </button>
     );
 });

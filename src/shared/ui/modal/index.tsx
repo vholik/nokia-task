@@ -9,6 +9,8 @@ type ModalProps = {
     children: ReactNode;
 };
 
+Modal.setAppElement('#__next');
+
 const ModalComponent = ({ isOpen, onClose, children }: ModalProps) => {
     return (
         <AnimatePresence>
