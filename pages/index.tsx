@@ -1,3 +1,3 @@
-import { Main } from '@/app/index';
+import { WrappedApp } from '@/app/index';
 
-export default Main;
+export default WrappedApp;

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { InputComponent } from '@/shared/ui/input';
 import { ButtonComponent } from '@/shared/ui/button';
 import ModalComponent from '@/shared/ui/modal';
+import { Chevron, FilterIcon } from '@/shared/images';
 import modalStyle from './modal.module.scss';
 import rowStyle from './row.module.scss';
 
@@ -54,7 +55,13 @@ const FilterModal = ({ handleModalClose, modalOpen }: FilterModalProps) => {
     );
 };
 
-export const FilterRow = () => {
+interface FilterRowProps {
+    // eslint-disable-next-line no-unused-vars
+    inputHandler: (value: string) => void;
+    value: string;
+}
+
+export const FilterRow = ({ inputHandler, value }: FilterRowProps) => {
     const [modalOpen, setModalOpen] = useState(false);
 
     const handleModalOpen = () => {
@@ -66,10 +73,23 @@ export const FilterRow = () => {
     };
 
     return (
-        <div className={rowStyle.wrapper}>
-            <h2 className={rowStyle.title}>Countries</h2>
-            <button onClick={handleModalOpen}>Open my modal</button>
+        <>
             <FilterModal modalOpen={modalOpen} handleModalClose={handleModalClose} />
-        </div>
+            <div className={rowStyle.wrapper}>
+                <h2 className={rowStyle.title}>Countries</h2>
+                <span className={rowStyle.right}>
+                    <InputComponent
+                        placeholder="Search"
+                        inputMode="search"
+                        value={value}
+                        onChange={(e) => inputHandler(e.target.value)}
+                    />
+                    <span className={rowStyle.betweenLine}></span>
+                    <button onClick={handleModalOpen} className={rowStyle.button}>
+                        <FilterIcon /> Filter <Chevron />
+                    </button>
+                </span>
+            </div>
+        </>
     );
 };

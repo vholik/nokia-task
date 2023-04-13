@@ -7,11 +7,12 @@
 
 html {
     font-size: 16px;
+    scroll-behavior: smooth;
 }
 
 body {
     font-family: 'Inter', 'sans-serif';
-    margin: 2rem 200px;
+    margin: 2rem 0 2rem 0;
     color: var(--black);
 }
 
@@ -24,6 +25,7 @@ body {
     --slate-600: #717885;
     --slate-100: #f5f7fa;
     --stroke: #ececed;
+    --gray-onhover: #e3e3e3;
     --white: #ffffff;
     --white-onhover: #f3f3f3;
     --primary-100: #f1ebff;
@@ -33,4 +35,9 @@ body {
     --green: #70cb86;
     --yellow: #eac44a;
     --purple: #d16cd5;
+}
+
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
 }

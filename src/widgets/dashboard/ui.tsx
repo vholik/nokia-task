@@ -1,28 +1,21 @@
-import { toast } from 'react-hot-toast';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { DashboardCard, DashboardCardSkeleton } from '@/entities/card';
 import { Chevron } from '@/shared/images';
-import { useGetSummaryQuery } from './model';
+import { SummaryRes } from '@/shared/types';
 import style from './style.module.scss';
 
-export const Dashboard = () => {
-    const { isError, isLoading, data } = useGetSummaryQuery();
-    const [showDashboard, setShowDashboard] = useState(true);
+interface DashboardProps {
+    isLoading: boolean;
+    data: SummaryRes | undefined;
+}
 
-    useEffect(() => {
-        if (isError) {
-            toast.error('Error while fetching your data');
-        }
-    }, [isError]);
+export const Dashboard = ({ data, isLoading }: DashboardProps) => {
+    const [showDashboard, setShowDashboard] = useState(true);
 
     const showHandler = () => {
         setShowDashboard((state) => !state);
     };
-
-    if (isError) {
-        return <>Error occured</>;
-    }
 
     return (
         <div className={style.card}>
@@ -31,7 +24,7 @@ export const Dashboard = () => {
             ) : (
                 <button className={style.button} onClick={showHandler}>
                     Global info
-                    <Chevron up={!showDashboard} />
+                    <Chevron side={showDashboard ? 'bottom' : 'top'} />
                 </button>
             )}
 

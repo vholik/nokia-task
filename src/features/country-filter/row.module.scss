@@ -2,9 +2,42 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-top: 4rem;
 }
 
 .title {
     font-size: 1.2rem;
     color: var(--slate-600);
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.betweenLine {
+    width: 1px;
+    height: 16px;
+    background-color: var(--stroke);
+    display: block;
+}
+
+.button {
+    cursor: pointer;
+    display: flex;
+    border: none;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: transparent;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--slate-600);
+    padding: 0.5rem;
+    border-radius: 2rem;
+    transition: background 0.2s linear;
+
+    &:hover {
+        background-color: var(--slate-100);
+    }
 }

@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import type { TypedUseSelectorHook } from 'react-redux';
-import { dashboardApi } from 'widgets/dashboard';
+import { summaryApi } from './model';
 
 export const store = configureStore({
     reducer: {
-        [dashboardApi.reducerPath]: dashboardApi.reducer,
+        [summaryApi.reducerPath]: summaryApi.reducer,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(dashboardApi.middleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(summaryApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

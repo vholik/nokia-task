@@ -1,2 +1,1 @@
-export { Dashboard } from '.';
-export { dashboardApi } from './model';
+export { Dashboard } from './ui';
