@@ -22,11 +22,12 @@ const FilterModal = ({ handleModalClose, modalOpen, setFilter }: FilterModalProp
         formState: { errors },
         getValues,
         setValue,
+        reset,
     } = useForm<Filter>();
 
     const submit = (data: Filter) => {
-        setFilter(data);
         handleModalClose();
+        setFilter(data);
     };
 
     const changeSort = (key: Filter['sortBy']) => {
@@ -38,6 +39,18 @@ const FilterModal = ({ handleModalClose, modalOpen, setFilter }: FilterModalProp
         setSortBy(key);
 
         setValue('sortBy', key);
+    };
+
+    const clearFilter = () => {
+        reset();
+        setSortBy(null);
+        setFilter((prev) => ({
+            value: prev.value,
+            sortBy: null,
+            totalConfirmed: [NaN, NaN],
+            totalDeaths: [NaN, NaN],
+            totalRecovered: [NaN, NaN],
+        }));
     };
 
     return (
@@ -210,7 +223,11 @@ const FilterModal = ({ handleModalClose, modalOpen, setFilter }: FilterModalProp
                     <span className={modalStyle.line}></span>
                     <div className={modalStyle.wrapper}>
                         <ButtonComponent property="primary" value="Show results" type="submit" />
-                        <ButtonComponent value="Clear filters" type="button" />
+                        <ButtonComponent
+                            value="Clear filters"
+                            type="button"
+                            onClick={clearFilter}
+                        />
                     </div>
                 </div>
             </form>

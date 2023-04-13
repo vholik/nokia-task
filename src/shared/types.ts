@@ -31,6 +31,7 @@ export interface Filter {
     totalConfirmed: [number, number];
     totalRecovered: [number, number];
     sortBy: null | 'totalDeaths' | 'totalConfirmed' | 'totalRecovered';
+    value: string;
 }
 
 export type SetFilter = Dispatch<SetStateAction<Filter>>;

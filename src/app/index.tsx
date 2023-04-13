@@ -1,6 +1,6 @@
 import { Provider } from 'react-redux';
 import { Toaster, toast } from 'react-hot-toast';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Dashboard } from 'widgets/dashboard';
 import { CountryFilterRow } from '@/features/country-filter';
 import { CountryRows } from '@/entities/country';
@@ -32,6 +32,7 @@ const MainPage = () => {
         totalConfirmed: [0, 0],
         totalRecovered: [0, 0],
         sortBy: null,
+        value: '',
     });
 
     const pageHandler = (page: number) => {
@@ -57,27 +58,98 @@ const MainPage = () => {
         setSearchValue(value);
     };
 
-    useEffect(() => {
-        console.log(filter);
-    }, [filter]);
-
-    useEffect(() => {
+    const filterCallback = useCallback(() => {
         // Return to first page
         pageHandler(1);
 
-        if (searchValue === '' && data?.Countries) {
+        const isInitial =
+            !filter.sortBy &&
+            !filter.totalConfirmed[0] &&
+            !filter.totalConfirmed[1] &&
+            !filter.totalDeaths[0] &&
+            !filter.totalDeaths[1] &&
+            !filter.totalRecovered[0] &&
+            !filter.totalRecovered[1] &&
+            !filter.value;
+
+        if (isInitial && data?.Countries) {
             setCountries(data.Countries.slice(0, ITEMS_ON_PAGE));
             return setFetchedCountries(data?.Countries);
         }
 
-        const countries = data?.Countries.filter((v) =>
+        if (!data?.Countries) return;
+
+        let countries = data?.Countries.filter((it) => {
+            const totalConfirmed = it.TotalConfirmed;
+
+            if (
+                totalConfirmed >= (filter.totalConfirmed[0] || 0) &&
+                totalConfirmed <= (filter.totalConfirmed[1] || Infinity)
+            ) {
+                return true;
+            }
+
+            return false;
+        });
+
+        countries = countries.filter((it) => {
+            const totalDeaths = it.TotalDeaths;
+
+            if (
+                totalDeaths >= (filter.totalDeaths[0] || 0) &&
+                totalDeaths <= (filter.totalDeaths[1] || Infinity)
+            ) {
+                return true;
+            }
+
+            return false;
+        });
+
+        countries = countries.filter((it) => {
+            const totalRecovered = it.TotalConfirmed;
+
+            if (
+                totalRecovered >= (filter.totalRecovered[0] || 0) &&
+                totalRecovered <= (filter.totalRecovered[1] || Infinity)
+            ) {
+                return true;
+            }
+
+            return false;
+        });
+
+        const sortBy = filter.sortBy;
+
+        if (sortBy === 'totalConfirmed') {
+            countries = countries.sort((a, b) => b.TotalConfirmed - a.TotalConfirmed);
+        }
+        if (sortBy === 'totalDeaths') {
+            countries = countries.sort((a, b) => b.TotalDeaths - a.TotalDeaths);
+        }
+        if (sortBy === 'totalRecovered') {
+            countries = countries.sort((a, b) => b.TotalRecovered - a.TotalRecovered);
+        }
+
+        countries = countries.filter((v) =>
             v.Country.toLowerCase().includes(searchValue.toLowerCase()),
         );
 
-        if (countries) {
-            setFetchedCountries(countries);
-            setCountries(countries.slice(0, ITEMS_ON_PAGE));
-        }
+        setFetchedCountries(countries);
+        setCountries(countries.slice(0, ITEMS_ON_PAGE));
+    }, [filter]);
+
+    useEffect(() => {
+        filterCallback();
+    }, [filter]);
+
+    // Input debounce
+    useEffect(() => {
+        console.log(searchValue);
+
+        setFilter({
+            ...filter,
+            value: searchValue,
+        });
     }, [debouncedValue]);
 
     useEffect(() => {
