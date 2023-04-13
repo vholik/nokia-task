@@ -1,12 +1,15 @@
 import { Provider } from 'react-redux';
 import { Toaster, toast } from 'react-hot-toast';
 import { useCallback, useEffect, useState } from 'react';
+import Image from 'next/image';
 import { Dashboard } from 'widgets/dashboard';
 import { CountryFilterRow } from '@/features/country-filter';
 import { CountryRows } from '@/entities/country';
-import { Navigation, ITEMS_ON_PAGE } from '@/features/nav';
+import { Navigation, ITEMS_ON_PAGE } from '@/features/pagination';
 import { Country, Filter } from '@/shared/types';
 import { useDebounce } from '@/shared/lib';
+import { Header } from 'widgets/header';
+import ErrorImage from '@/shared/images/illustation.svg';
 import { store } from './store';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { useGetSummaryQuery } from './store/model';
@@ -15,6 +18,7 @@ export const WrappedApp = () => {
     return (
         <Provider store={store}>
             <Toaster />
+            <Header />
             <MainPage />
         </Provider>
     );
@@ -166,7 +170,16 @@ const MainPage = () => {
     }, [data]);
 
     if (isError) {
-        <div className="container">Error occured please try again later</div>;
+        return (
+            <div className="container">
+                <div className="error-illustration">
+                    <div className="icon">
+                        <Image width={130} height={130} alt="Error" src={ErrorImage} />
+                    </div>
+                    Error occured please try again later
+                </div>
+            </div>
+        );
     }
 
     return (
@@ -178,12 +191,14 @@ const MainPage = () => {
                 setFilter={setFilter}
             />
             <CountryRows countries={countries} isLoading={isLoading} />
-            <Navigation
-                count={fetchedCountries.length!}
-                currentPage={currentPage}
-                pageHandler={pageHandler}
-                moreHandler={moreHandler}
-            />
+            {!!countries.length && (
+                <Navigation
+                    count={fetchedCountries.length!}
+                    currentPage={currentPage}
+                    pageHandler={pageHandler}
+                    moreHandler={moreHandler}
+                />
+            )}
         </div>
     );
 };

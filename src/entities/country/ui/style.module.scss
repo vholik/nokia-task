@@ -19,9 +19,12 @@
         color: var(--black);
         font-weight: 500;
     }
+
+    &:last-child {
+        border-bottom: 1px solid var(--stroke);
+    }
 }
 
 .rows {
     margin-top: 2rem;
-    border-bottom: 1px solid var(--stroke);
 }

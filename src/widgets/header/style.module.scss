@@ -1,0 +1,28 @@
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.link {
+    color: var(--slate-600);
+    text-decoration: none;
+    position: relative;
+    padding-left: 1rem;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background-color: var(--stroke);
+    }
+}

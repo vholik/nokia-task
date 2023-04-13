@@ -1,7 +1,9 @@
 import cn from 'classnames';
 import Skeleton from 'react-loading-skeleton';
+import Image from 'next/image';
 import { Country } from '@/shared/types';
 import { stringToDate } from '@/shared/lib';
+import ErrorImage from '@/shared/images/illustation.svg';
 import style from './style.module.scss';
 
 interface CountryProps {
@@ -75,6 +77,12 @@ export const CountryRows = ({ countries, isLoading }: CountryRowsProps) => {
                     <CountryRowSkeleton />
                     <CountryRowSkeleton />
                     <CountryRowSkeleton />
+                    <CountryRowSkeleton />
+                    <CountryRowSkeleton />
+                    <CountryRowSkeleton />
+                    <CountryRowSkeleton />
+                    <CountryRowSkeleton />
+                    <CountryRowSkeleton />
                 </>
             ) : (
                 <>
@@ -82,6 +90,14 @@ export const CountryRows = ({ countries, isLoading }: CountryRowsProps) => {
                     {countries?.map((country) => (
                         <CountryRow country={country} key={country.Slug} />
                     ))}
+                    {!countries?.length && (
+                        <div className="error-illustration">
+                            <div className="icon">
+                                <Image width={130} height={130} alt="Error" src={ErrorImage} />
+                            </div>
+                            No countries founded
+                        </div>
+                    )}
                 </>
             )}
         </div>
