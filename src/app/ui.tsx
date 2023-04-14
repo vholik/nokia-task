@@ -148,8 +148,6 @@ const MainPage = () => {
 
     // Input debounce
     useEffect(() => {
-        console.log(searchValue);
-
         setFilter({
             ...filter,
             value: searchValue,
